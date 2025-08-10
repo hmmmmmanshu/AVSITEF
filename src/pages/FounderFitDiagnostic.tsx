@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Check, Clock, Users, TrendingUp, Star, ArrowRight, Shield } from "lucide-react";
+import { Check, Clock, Users, TrendingUp, Star, ArrowRight, Shield, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
@@ -43,6 +43,14 @@ const FounderFitDiagnostic: React.FC = () => {
     window.open("https://learn.acharyaventures.com/l/d7142f0122", "_blank");
   };
 
+  const smoothScrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const rectTop = el.getBoundingClientRect().top + window.scrollY;
+    const offset = window.innerWidth < 768 ? 100 : 80;
+    window.scrollTo({ top: rectTop - offset, behavior: "smooth" });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero with video-ready background - full viewport */}
@@ -61,18 +69,18 @@ const FounderFitDiagnostic: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
 
         <div className="relative container mx-auto max-w-3xl text-center py-12 sm:py-20">
-          <div className="inline-flex items-center gap-2 bg-pulse-500/20 border border-pulse-500/30 text-pulse-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium mb-5 sm:mb-7">
+          <div className="inline-flex items-center gap-2 bg-pulse-500/20 border border-pulse-500/30 text-pulse-300 px-3 py-1.5 rounded-full text-sm sm:text-base font-medium mb-6 sm:mb-8">
             <Clock className="w-4 h-4" /> Next 8 call slots available
           </div>
 
-          <h1 className="text-[2.2rem] leading-[1.12] sm:text-6xl font-bold mb-4 sm:mb-6">
+          <h1 className="text-[2.6rem] leading-tight sm:text-6xl font-bold mb-4 sm:mb-6 tracking-tight">
             Stuck between <span className="text-pulse-300">"launched"</span> and
             <br className="hidden sm:block" /> <span className="text-pulse-300">"lift-off"?</span>
           </h1>
 
           {/* Typing animation sub-line (slower) */}
-          <div className="mb-6 sm:mb-9 text-white/85">
-            <TypingAnimation startOnView={true} speedMs={65} className="text-base sm:text-2xl">
+          <div className="mb-7 sm:mb-10 text-white/85">
+            <TypingAnimation startOnView={true} speedMs={70} className="text-lg sm:text-2xl">
               Fix your biggest traction blocker in a 1-hour Founder Fit Diagnostic with serial founder Aditya Bajaj.
             </TypingAnimation>
           </div>
@@ -80,23 +88,34 @@ const FounderFitDiagnostic: React.FC = () => {
           <Button
             onClick={handleCTAClick}
             size="lg"
-            className="bg-primary hover:bg-pulse-600 text-primary-foreground text-base sm:text-lg w-full sm:w-auto px-6 sm:px-8 py-4 sm:py-5 rounded-full font-bold transition-all duration-300"
+            className="bg-primary hover:bg-pulse-600 text-primary-foreground text-lg sm:text-xl w-full sm:w-auto px-7 sm:px-9 py-5 sm:py-6 rounded-full font-bold transition-all duration-300"
           >
             Book My Diagnostic Call – ₹499
             <ArrowRight className="ml-2 w-5 h-5 sm:w-6 sm:h-6" />
           </Button>
 
-          <div className="mt-5 sm:mt-8 flex justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/80">
-            <span>Next slot in:</span>
-            <span className="font-mono font-bold text-pulse-300">
-              {String(timeLeft.hours).padStart(2, "0")}:{String(timeLeft.minutes).padStart(2, "0")}:{String(timeLeft.seconds).padStart(2, "0")}
-            </span>
+          <div className="mt-5 sm:mt-8 flex flex-col items-center gap-4 text-sm sm:text-base text-white/80">
+            <div className="flex items-center gap-2">
+              <span>Next slot in:</span>
+              <span className="font-mono font-bold text-pulse-300">
+                {String(timeLeft.hours).padStart(2, "0")}:{String(timeLeft.minutes).padStart(2, "0")}:{String(timeLeft.seconds).padStart(2, "0")}
+              </span>
+            </div>
+            {/* Animated Down Arrow to next section */}
+            <button
+              type="button"
+              onClick={() => smoothScrollTo("why")}
+              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur px-3 py-2 text-white hover:bg-white/20 transition"
+              aria-label="Scroll to next section"
+            >
+              <ChevronDown className="w-6 h-6 animate-bounce" aria-hidden="true" />
+            </button>
           </div>
         </div>
       </section>
 
       {/* Why Diagnostic First */}
-      <section className="snap-start py-12 sm:py-16 px-4 bg-background">
+      <section id="why" className="snap-start py-12 sm:py-16 px-4 bg-background">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-4">Why a diagnostic first?</h2>
@@ -104,14 +123,14 @@ const FounderFitDiagnostic: React.FC = () => {
               Startups don't fail for lack of hustle; they fail for building the wrong thing,
               marketing it the wrong way, or hiring the wrong team.
             </p>
-            <p className="text-sm sm:text-lg text-foreground mt-4 font-medium">
+            <p className="text-base sm:text-lg text-foreground mt-4 font-medium">
               A 60-minute call costs you <span className="text-pulse-600 font-bold">₹499</span> — burning another
               <span className="text-pulse-600 font-bold"> ₹50,000</span> on ads or dev costs you much more.
             </p>
           </div>
 
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 bg-green-100 border border-green-200 text-green-700 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-xs sm:text-sm font-medium">
+            <div className="inline-flex items-center gap-2 bg-green-100 border border-green-200 text-green-700 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm sm:text-base font-medium">
               <Shield className="w-4 h-4" /> Money-back guarantee if you get zero value
             </div>
           </div>
