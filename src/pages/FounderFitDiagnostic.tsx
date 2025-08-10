@@ -282,25 +282,18 @@ const FounderFitDiagnostic: React.FC = () => {
         </div>
       </section>
 
-      {/* Simple Process - Full Page with Main Scroll Integration */}
-      <section className="relative min-h-[300vh] overflow-hidden">
-        {/* Section Header - Fixed at top */}
-        <div className="sticky top-0 z-20 bg-gradient-to-b from-white via-white to-transparent py-8 sm:py-12">
-          <div className="container mx-auto max-w-6xl px-4">
-            <div className="text-center">
-              <div className="inline-flex items-center gap-2 bg-pulse-500/10 border border-pulse-500/20 text-pulse-600 px-4 py-2 rounded-full text-sm font-medium mb-4">
-                <div className="w-2 h-2 bg-pulse-500 rounded-full animate-pulse"></div>
-                How It Works
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-bold text-foreground">
-                Simple <span className="text-pulse-600">Process</span>
-              </h2>
+      {/* Simple Process - Proper Container */}
+      <section className="py-12 sm:py-16 px-4 bg-muted/50">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center gap-2 bg-pulse-500/10 border border-pulse-500/20 text-pulse-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
+              <div className="w-2 h-2 bg-pulse-500 rounded-full animate-pulse"></div>
+              How It Works
             </div>
+            <h2 className="text-3xl sm:text-5xl font-bold text-foreground">
+              Simple <span className="text-pulse-600">Process</span>
+            </h2>
           </div>
-        </div>
-        
-        {/* Full-screen Sticky Scroll */}
-        <div className="absolute inset-0 top-0">
           <StickyScrollRevealDemo />
         </div>
       </section>
@@ -566,16 +559,7 @@ const FounderFitDiagnostic: React.FC = () => {
         </div>
       </section>
 
-      {/* Floating CTA for mobile */}
-      <div className="fixed bottom-4 left-4 right-4 z-50 sm:hidden">
-        <Button
-          onClick={handleCTAClick}
-          className="w-full bg-pulse-500 hover:bg-pulse-600 text-white font-bold py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-        >
-          Book Call – ₹499
-          <ArrowRight className="ml-2 w-5 h-5" />
-        </Button>
-      </div>
+
     </div>
   );
 };

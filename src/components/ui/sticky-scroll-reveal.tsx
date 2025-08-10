@@ -1,96 +1,111 @@
+"use client";
 import React, { useEffect, useRef, useState } from "react";
-import { motion, useMotionValueEvent, useScroll } from "framer-motion";
+import { useMotionValueEvent, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-
-interface StickyItem {
-  title: string;
-  description: string;
-  content?: React.ReactNode;
-}
 
 export const StickyScroll = ({
   content,
   contentClassName,
-  fullPage = false,
-  heightClass,
 }: {
-  content: StickyItem[];
+  content: {
+    title: string;
+    description: string;
+    content?: React.ReactNode | any;
+  }[];
   contentClassName?: string;
-  fullPage?: boolean;
-  heightClass?: string;
 }) => {
-  const [activeCard, setActiveCard] = useState(0);
-  const ref = useRef<HTMLDivElement | null>(null);
-
-  // Track viewport scroll relative to this section
+  const [activeCard, setActiveCard] = React.useState(0);
+  const ref = useRef<any>(null);
   const { scrollYProgress } = useScroll({
-    target: ref,
+    // uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
+    // target: ref
+    container: ref,
     offset: ["start start", "end start"],
   });
-
   const cardLength = content.length;
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const breakpoints = content.map((_, index) => index / cardLength);
-    const closestIndex = breakpoints.reduce((acc, bp, i) => {
-      return Math.abs(latest - bp) < Math.abs(latest - breakpoints[acc]) ? i : acc;
-    }, 0);
-    setActiveCard(closestIndex);
+    const cardsBreakpoints = content.map((_, index) => index / cardLength);
+    const closestBreakpointIndex = cardsBreakpoints.reduce(
+      (acc, breakpoint, index) => {
+        const distance = Math.abs(latest - breakpoint);
+        if (distance < Math.abs(latest - cardsBreakpoints[acc])) {
+          return index;
+        }
+        return acc;
+      },
+      0,
+    );
+    setActiveCard(closestBreakpointIndex);
   });
 
-  const backgroundColors = ["#121212", "#1e1e1e", "#0f0f0f"]; // brand dark neutrals
+  const backgroundColors = [
+    "#0f172a", // slate-900
+    "#000000", // black
+    "#171717", // neutral-900
+  ];
   const linearGradients = [
-    "linear-gradient(to bottom right, #f97316, #fdba74)",
-    "linear-gradient(to bottom right, #ea580c, #fb923c)",
-    "linear-gradient(to bottom right, #f97316, #ea580c)",
+    "linear-gradient(to bottom right, #06b6d4, #10b981)", // cyan-500 to emerald-500
+    "linear-gradient(to bottom right, #ec4899, #6366f1)", // pink-500 to indigo-500
+    "linear-gradient(to bottom right, #f97316, #eab308)", // orange-500 to yellow-500
   ];
 
-  const [backgroundGradient, setBackgroundGradient] = useState(linearGradients[0]);
+  const [backgroundGradient, setBackgroundGradient] = useState(
+    linearGradients[0],
+  );
 
   useEffect(() => {
     setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
   }, [activeCard]);
 
-  // When using page scroll, give the section extra height to progress through cards
-  const wrapperHeight = heightClass ?? (fullPage ? "h-screen" : "h-[200vh]");
-
   return (
     <motion.div
-      animate={{ backgroundColor: backgroundColors[activeCard % backgroundColors.length] }}
-      className={cn("relative flex w-full justify-center space-x-6 rounded-none sm:rounded-md py-8 sm:py-12", wrapperHeight)}
+      animate={{
+        backgroundColor: backgroundColors[activeCard % backgroundColors.length],
+      }}
+      className="relative flex h-[30rem] justify-center space-x-10 overflow-y-auto rounded-md p-10"
       ref={ref}
     >
-      <div className="relative flex items-start px-4 sm:px-6 w-full max-w-6xl">
+      <div className="div relative flex items-start px-4">
         <div className="max-w-2xl">
           {content.map((item, index) => (
-            <div key={item.title + index} className="my-16 sm:my-24">
+            <div key={item.title + index} className="my-20">
               <motion.h2
-                initial={{ opacity: 0 }}
-                animate={{ opacity: activeCard === index ? 1 : 0.35 }}
-                className="text-2xl sm:text-3xl font-bold text-slate-100"
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: activeCard === index ? 1 : 0.3,
+                }}
+                className="text-2xl font-bold text-slate-100"
               >
                 {item.title}
               </motion.h2>
               <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: activeCard === index ? 1 : 0.35 }}
-                className="mt-4 sm:mt-6 max-w-sm text-[15px] sm:text-base leading-relaxed text-slate-300"
+                initial={{
+                  opacity: 0,
+                }}
+                animate={{
+                  opacity: activeCard === index ? 1 : 0.3,
+                }}
+                className="text-kg mt-10 max-w-sm text-slate-300"
               >
                 {item.description}
               </motion.p>
             </div>
           ))}
-          <div className="h-24 sm:h-40" />
+          <div className="h-40" />
         </div>
       </div>
       <div
         style={{ background: backgroundGradient }}
         className={cn(
-          "sticky top-10 hidden h-56 sm:h-72 w-72 sm:w-80 overflow-hidden rounded-md bg-white/5 ring-1 ring-white/10 backdrop-blur lg:block",
-          contentClassName
+          "sticky top-10 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block",
+          contentClassName,
         )}
       >
-        {content[activeCard]?.content ?? null}
+        {content[activeCard].content ?? null}
       </div>
     </motion.div>
   );

@@ -1,5 +1,6 @@
+"use client";
 import React from "react";
-import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
+import { StickyScroll } from "../ui/sticky-scroll-reveal";
 
 const content = [
   {
@@ -7,7 +8,9 @@ const content = [
     description:
       "Pick a convenient time and confirm with a small commitment fee that is credited to any sprint you join.",
     content: (
-      <div className="flex h-full w-full items-center justify-center text-white">₹499 Booking</div>
+      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+        Book your slot
+      </div>
     ),
   },
   {
@@ -15,7 +18,15 @@ const content = [
     description:
       "Share key metrics, goals, and links so we can diagnose quickly and spend the call on decisions, not digging.",
     content: (
-      <div className="flex h-full w-full items-center justify-center text-white">Metrics & Goals</div>
+      <div className="flex h-full w-full items-center justify-center text-white">
+        <img
+          src="/linear.webp"
+          width={300}
+          height={300}
+          className="h-full w-full object-cover"
+          alt="linear board demo"
+        />
+      </div>
     ),
   },
   {
@@ -23,7 +34,9 @@ const content = [
     description:
       "Live teardown of traction leaks, Q&A, and a personalized roadmap tailored to your current stage.",
     content: (
-      <div className="flex h-full w-full items-center justify-center text-white">Live Diagnosis</div>
+      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
+        Live Diagnosis
+      </div>
     ),
   },
   {
@@ -31,7 +44,9 @@ const content = [
     description:
       "You receive a clear PDF with your Founder-Market-Fit score, GTM focus, and 14-day sprint plan.",
     content: (
-      <div className="flex h-full w-full items-center justify-center text-white">Plan PDF</div>
+      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+        Action plan PDF
+      </div>
     ),
   },
   {
@@ -39,17 +54,19 @@ const content = [
     description:
       "Apply your ₹499 toward Validation, MVP, or GTM Sprint within 14 days if it is the right fit.",
     content: (
-      <div className="flex h-full w-full items-center justify-center text-white">Sprint Credit</div>
+      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
+        Sprint Credit
+      </div>
     ),
   },
 ];
 
-export const StickyScrollRevealDemo: React.FC = () => {
+export function StickyScrollRevealDemo() {
   return (
-    <div className="w-full">
-      <StickyScroll content={content} fullPage heightClass="h-screen" />
+    <div className="w-full py-4">
+      <StickyScroll content={content} />
     </div>
   );
-};
+}
 
 export default StickyScrollRevealDemo;
