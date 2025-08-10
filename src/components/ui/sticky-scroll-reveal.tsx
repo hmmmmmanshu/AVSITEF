@@ -11,9 +11,13 @@ interface StickyItem {
 export const StickyScroll = ({
   content,
   contentClassName,
+  fullPage = false,
+  heightClass,
 }: {
   content: StickyItem[];
   contentClassName?: string;
+  fullPage?: boolean;
+  heightClass?: string;
 }) => {
   const [activeCard, setActiveCard] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -33,11 +37,10 @@ export const StickyScroll = ({
     setActiveCard(closestIndex);
   });
 
-  // Brand-aligned backgrounds
-  const backgroundColors = ["#121212", "#1e1e1e", "#0f0f0f"]; // dark neutrals
+  const backgroundColors = ["#121212", "#1e1e1e", "#0f0f0f"]; // brand dark neutrals
   const linearGradients = [
-    "linear-gradient(to bottom right, #f97316, #fdba74)", // pulse-500 to pulse-300
-    "linear-gradient(to bottom right, #ea580c, #fb923c)", // pulse-600 to pulse-400
+    "linear-gradient(to bottom right, #f97316, #fdba74)", // pulse-500 -> pulse-300
+    "linear-gradient(to bottom right, #ea580c, #fb923c)", // pulse-600 -> pulse-400
     "linear-gradient(to bottom right, #f97316, #ea580c)", // pulse blend
   ];
 
@@ -47,13 +50,15 @@ export const StickyScroll = ({
     setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
   }, [activeCard]);
 
+  const wrapperHeight = heightClass ?? (fullPage ? "h-screen" : "h-[24rem] sm:h-[30rem]");
+
   return (
     <motion.div
       animate={{ backgroundColor: backgroundColors[activeCard % backgroundColors.length] }}
-      className="relative flex h-[24rem] sm:h-[30rem] justify-center space-x-6 overflow-y-auto rounded-md p-6 sm:p-10"
+      className={cn("relative flex w-full justify-center space-x-6 overflow-y-auto rounded-none sm:rounded-md p-0 sm:p-10", wrapperHeight)}
       ref={ref}
     >
-      <div className="relative flex items-start px-1 sm:px-4">
+      <div className="relative flex items-start px-4 sm:px-6 w-full max-w-5xl">
         <div className="max-w-2xl">
           {content.map((item, index) => (
             <div key={item.title + index} className="my-12 sm:my-20">

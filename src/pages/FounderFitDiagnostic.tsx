@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Check, Clock, Users, TrendingUp, Star, ArrowRight, Shield, CreditCard, FileText, Video, Mail } from "lucide-react";
+import { Check, Clock, Users, TrendingUp, Star, ArrowRight, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Ripple } from "@/components/magicui/ripple";
 import { TypingAnimation } from "@/components/magicui/typing-animation";
 import { Highlighter } from "@/components/magicui/highlighter";
 import StickyScrollRevealDemo from "@/components/process/StickyScrollRevealDemo";
@@ -46,25 +45,34 @@ const FounderFitDiagnostic: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-dark-900/95 to-dark-800 text-white py-14 sm:py-24 px-4">
-        {/* Hide ripple on mobile to prevent layout issues */}
-        <div className="absolute inset-0 opacity-60 hidden sm:block">
-          <Ripple />
-        </div>
-        <div className="relative container mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center gap-2 bg-pulse-500/15 border border-pulse-500/30 text-pulse-400 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
+      {/* Hero with video-ready background */}
+      <section className="relative overflow-hidden text-white px-4">
+        {/* Video background placeholder (add /public/hero-bg.mp4) */}
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/hero-bg.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-label="Hero background video"
+        />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+
+        <div className="relative container mx-auto max-w-3xl text-center py-16 sm:py-28">
+          <div className="inline-flex items-center gap-2 bg-pulse-500/20 border border-pulse-500/30 text-pulse-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium mb-5 sm:mb-7">
             <Clock className="w-4 h-4" /> Next 8 call slots available
           </div>
 
-          <h1 className="text-[1.9rem] leading-[1.15] sm:text-5xl font-bold mb-3 sm:mb-6">
-            Stuck between <span className="text-pulse-400">"launched"</span> and
-            <br className="hidden sm:block" /> <span className="text-pulse-400">"lift-off"?</span>
+          <h1 className="text-[2.1rem] leading-[1.12] sm:text-6xl font-bold mb-4 sm:mb-6">
+            Stuck between <span className="text-pulse-300">"launched"</span> and
+            <br className="hidden sm:block" /> <span className="text-pulse-300">"lift-off"?</span>
           </h1>
 
-          {/* Typing animation sub-line */}
-          <div className="mb-6 sm:mb-8 text-white/80">
-            <TypingAnimation startOnView={true} speedMs={24} className="text-base sm:text-xl">
+          {/* Typing animation sub-line (slower) */}
+          <div className="mb-6 sm:mb-9 text-white/85">
+            <TypingAnimation startOnView={true} speedMs={60} className="text-base sm:text-2xl">
               Fix your biggest traction blocker in a 1-hour Founder Fit Diagnostic with serial founder Aditya Bajaj.
             </TypingAnimation>
           </div>
@@ -78,9 +86,9 @@ const FounderFitDiagnostic: React.FC = () => {
             <ArrowRight className="ml-2 w-5 h-5 sm:w-6 sm:h-6" />
           </Button>
 
-          <div className="mt-5 sm:mt-8 flex justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/70">
+          <div className="mt-5 sm:mt-8 flex justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-white/80">
             <span>Next slot in:</span>
-            <span className="font-mono font-bold text-pulse-400">
+            <span className="font-mono font-bold text-pulse-300">
               {String(timeLeft.hours).padStart(2, "0")}:{String(timeLeft.minutes).padStart(2, "0")}:{String(timeLeft.seconds).padStart(2, "0")}
             </span>
           </div>
@@ -185,14 +193,14 @@ const FounderFitDiagnostic: React.FC = () => {
       </section>
 
       {/* Simple Process (Sticky Scroll Reveal) */}
-      <section className="py-12 sm:py-16 px-4 bg-muted/50">
-        <div className="container mx-auto max-w-5xl">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground text-center mb-6 sm:mb-10">Simple Process</h2>
+      <section className="py-12 sm:py-16 px-0 bg-muted/50">
+        <div className="container mx-auto max-w-6xl">
+          <h2 className="px-4 text-2xl sm:text-3xl font-bold text-foreground text-center mb-6 sm:mb-10">Simple Process</h2>
           <StickyScrollRevealDemo />
         </div>
       </section>
 
-      {/* The remaining sections (About, Snapshots, FAQ, Guarantee, Final CTA) remain below unchanged */}
+      {/* Remaining sections (About, Snapshots, FAQ, Guarantee, Final CTA) unchanged */}
     </div>
   );
 };
