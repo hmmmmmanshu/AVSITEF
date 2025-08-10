@@ -45,8 +45,8 @@ const FounderFitDiagnostic: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero with video-ready background */}
-      <section className="relative overflow-hidden text-white px-4">
+      {/* Hero with video-ready background - full viewport */}
+      <section className="relative overflow-hidden text-white px-4 min-h-[100svh] flex items-center">
         {/* Video background placeholder (add /public/hero-bg.mp4) */}
         <video
           className="absolute inset-0 h-full w-full object-cover"
@@ -60,19 +60,19 @@ const FounderFitDiagnostic: React.FC = () => {
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
 
-        <div className="relative container mx-auto max-w-3xl text-center py-16 sm:py-28">
+        <div className="relative container mx-auto max-w-3xl text-center py-12 sm:py-20">
           <div className="inline-flex items-center gap-2 bg-pulse-500/20 border border-pulse-500/30 text-pulse-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium mb-5 sm:mb-7">
             <Clock className="w-4 h-4" /> Next 8 call slots available
           </div>
 
-          <h1 className="text-[2.1rem] leading-[1.12] sm:text-6xl font-bold mb-4 sm:mb-6">
+          <h1 className="text-[2.2rem] leading-[1.12] sm:text-6xl font-bold mb-4 sm:mb-6">
             Stuck between <span className="text-pulse-300">"launched"</span> and
             <br className="hidden sm:block" /> <span className="text-pulse-300">"lift-off"?</span>
           </h1>
 
           {/* Typing animation sub-line (slower) */}
           <div className="mb-6 sm:mb-9 text-white/85">
-            <TypingAnimation startOnView={true} speedMs={60} className="text-base sm:text-2xl">
+            <TypingAnimation startOnView={true} speedMs={65} className="text-base sm:text-2xl">
               Fix your biggest traction blocker in a 1-hour Founder Fit Diagnostic with serial founder Aditya Bajaj.
             </TypingAnimation>
           </div>
@@ -96,7 +96,7 @@ const FounderFitDiagnostic: React.FC = () => {
       </section>
 
       {/* Why Diagnostic First */}
-      <section className="py-12 sm:py-16 px-4 bg-background">
+      <section className="snap-start py-12 sm:py-16 px-4 bg-background">
         <div className="container mx-auto max-w-3xl">
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-4xl font-bold text-foreground mb-4">Why a diagnostic first?</h2>
