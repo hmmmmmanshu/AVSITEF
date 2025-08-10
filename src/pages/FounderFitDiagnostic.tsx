@@ -53,59 +53,72 @@ const FounderFitDiagnostic: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero with video-ready background - full viewport */}
-      <section className="relative overflow-hidden text-white px-4 min-h-[100svh] flex items-center">
-        {/* Video background placeholder (add /public/hero-bg.mp4) */}
+      {/* Hero with improved mobile formatting - full viewport */}
+      <section className="relative overflow-hidden text-white min-h-[100svh] flex items-center">
+        {/* Better fallback background for when video doesn't load */}
+        <div className="absolute inset-0 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-900" />
+        
+        {/* Video background (optional - will fallback to gradient above) */}
         <video
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover opacity-60"
           src="/hero-bg.mp4"
           autoPlay
           muted
           loop
           playsInline
           aria-label="Hero background video"
+          onError={(e) => {
+            // Hide video on error, fallback to gradient background
+            (e.target as HTMLVideoElement).style.display = 'none';
+          }}
         />
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70" />
+        
+        {/* Refined overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/60" />
 
-        <div className="relative container mx-auto max-w-3xl text-center py-12 sm:py-20">
-          <div className="inline-flex items-center gap-2 bg-pulse-500/20 border border-pulse-500/30 text-pulse-300 px-3 py-1.5 rounded-full text-sm sm:text-base font-medium mb-6 sm:mb-8">
+        <div className="relative w-full max-w-4xl mx-auto text-center px-6 py-16 sm:px-8 sm:py-20">
+          {/* Improved badge styling for mobile */}
+          <div className="inline-flex items-center gap-2 bg-pulse-500/25 border border-pulse-400/40 text-pulse-200 px-4 py-2 rounded-full text-sm font-medium mb-8 sm:mb-10 backdrop-blur-sm">
             <Clock className="w-4 h-4" /> Next 8 call slots available
           </div>
 
-          <h1 className="text-[2.6rem] leading-tight sm:text-6xl font-bold mb-4 sm:mb-6 tracking-tight">
+          {/* Enhanced mobile typography with better spacing */}
+          <h1 className="text-3xl leading-[1.1] sm:text-6xl font-bold mb-6 sm:mb-8 tracking-tight px-2">
             Stuck between <span className="text-pulse-300">"launched"</span> and
             <br className="hidden sm:block" /> <span className="text-pulse-300">"lift-off"?</span>
           </h1>
 
-          {/* Typing animation sub-line (slower) */}
-          <div className="mb-7 sm:mb-10 text-white/85">
-            <TypingAnimation startOnView={true} speedMs={70} className="text-lg sm:text-2xl">
+          {/* Better responsive typography for sub-headline */}
+          <div className="mb-8 sm:mb-12 text-white/90 px-2">
+            <TypingAnimation startOnView={true} speedMs={70} className="text-base leading-relaxed sm:text-2xl">
               Fix your biggest traction blocker in a 1-hour Founder Fit Diagnostic with serial founder Aditya Bajaj.
             </TypingAnimation>
           </div>
 
+          {/* Enhanced CTA button for mobile */}
           <Button
             onClick={handleCTAClick}
             size="lg"
-            className="bg-primary hover:bg-pulse-600 text-primary-foreground text-lg sm:text-xl w-full sm:w-auto px-7 sm:px-9 py-5 sm:py-6 rounded-full font-bold transition-all duration-300"
+            className="bg-primary hover:bg-pulse-600 text-white text-base sm:text-xl w-full max-w-sm sm:max-w-none sm:w-auto px-8 py-4 sm:px-9 sm:py-6 rounded-full font-bold transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             Book My Diagnostic Call – ₹499
             <ArrowRight className="ml-2 w-5 h-5 sm:w-6 sm:h-6" />
           </Button>
 
-          <div className="mt-5 sm:mt-8 flex flex-col items-center gap-4 text-sm sm:text-base text-white/80">
-            <div className="flex items-center gap-2">
+          {/* Improved spacing and layout for mobile */}
+          <div className="mt-8 sm:mt-10 flex flex-col items-center gap-6 text-sm sm:text-base text-white/80">
+            <div className="flex items-center gap-2 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10">
               <span>Next slot in:</span>
-              <span className="font-mono font-bold text-pulse-300">
+              <span className="font-mono font-bold text-pulse-300 text-base">
                 {String(timeLeft.hours).padStart(2, "0")}:{String(timeLeft.minutes).padStart(2, "0")}:{String(timeLeft.seconds).padStart(2, "0")}
               </span>
             </div>
-            {/* Animated Down Arrow to next section */}
+            
+            {/* Enhanced down arrow for mobile */}
             <button
               type="button"
               onClick={() => smoothScrollTo("why")}
-              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 backdrop-blur px-3 py-2 text-white hover:bg-white/20 transition"
+              className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur-sm px-4 py-3 text-white hover:bg-white/20 transition-all duration-300 hover:scale-105"
               aria-label="Scroll to next section"
             >
               <ChevronDown className="w-6 h-6 animate-bounce" aria-hidden="true" />
