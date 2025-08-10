@@ -231,14 +231,14 @@ const FounderFitDiagnostic: React.FC = () => {
                 
                 <ul className="space-y-4">
                   {[
-                    { icon: "🚀", text: "Founders 3-18 months in, stitched together an MVP, but revenue is flat." },
-                    { icon: "🦴", text: "Side-hustlers who've spent on marketing/dev and still hear crickets." },
-                    { icon: "💰", text: "Early teams prepping for pre-seed and need an outside lens on metrics." },
-                    { icon: "📊", text: "Coachable entrepreneurs who prefer data over guesswork." },
-                  ].map((item, i) => (
+                    "Founders 3-18 months in, stitched together an MVP, but revenue is flat.",
+                    "Side-hustlers who've spent on marketing/dev and still hear crickets.",
+                    "Early teams prepping for pre-seed and need an outside lens on metrics.",
+                    "Coachable entrepreneurs who prefer data over guesswork.",
+                  ].map((text, i) => (
                     <li key={i} className="flex items-start gap-4 group">
-                      <span className="text-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-200">{item.icon}</span>
-                      <span className="text-base sm:text-lg text-green-800 leading-relaxed">{item.text}</span>
+                      <div className="w-2 h-2 bg-green-600 rounded-full mt-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-200"></div>
+                      <span className="text-base sm:text-lg text-green-800 leading-relaxed">{text}</span>
                     </li>
                   ))}
                 </ul>
@@ -257,13 +257,13 @@ const FounderFitDiagnostic: React.FC = () => {
                 
                 <ul className="space-y-4 mb-6">
                   {[
-                    { icon: "🪙", text: '"Get-rich-quick" seekers looking for the next crypto.' },
-                    { icon: "🙈", text: "Founders who refuse feedback." },
-                    { icon: "💸", text: "Anyone who thinks more funding alone will fix the business." },
-                  ].map((item, i) => (
+                    '"Get-rich-quick" seekers looking for the next crypto.',
+                    "Founders who refuse feedback.",
+                    "Anyone who thinks more funding alone will fix the business.",
+                  ].map((text, i) => (
                     <li key={i} className="flex items-start gap-4 group">
-                      <span className="text-2xl flex-shrink-0 group-hover:scale-110 transition-transform duration-200">{item.icon}</span>
-                      <span className="text-base sm:text-lg text-red-800 leading-relaxed">{item.text}</span>
+                      <div className="w-2 h-2 bg-red-600 rounded-full mt-3 flex-shrink-0 group-hover:scale-150 transition-transform duration-200"></div>
+                      <span className="text-base sm:text-lg text-red-800 leading-relaxed">{text}</span>
                     </li>
                   ))}
                 </ul>
@@ -273,7 +273,7 @@ const FounderFitDiagnostic: React.FC = () => {
                   <div className="absolute -top-2 -left-2 w-4 h-4 bg-pulse-500 rounded-full animate-ping"></div>
                   <p className="text-base sm:text-lg text-red-800 italic font-medium">
                     If you're <Highlighter action="underline" color="#f97316">already the smartest person in the room</Highlighter>,
-                    congrats — go build your unicorn; we'll watch the IPO from our sofas. 🛋️
+                    congrats — go build your unicorn; we'll watch the IPO from our sofas.
                   </p>
                 </div>
               </div>
@@ -282,20 +282,25 @@ const FounderFitDiagnostic: React.FC = () => {
         </div>
       </section>
 
-      {/* Simple Process - Proper Container */}
-      <section className="py-12 sm:py-16 px-4 bg-muted/50">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-2 bg-pulse-500/10 border border-pulse-500/20 text-pulse-600 px-4 py-2 rounded-full text-sm font-medium mb-6">
-              <div className="w-2 h-2 bg-pulse-500 rounded-full animate-pulse"></div>
-              How It Works
+      {/* Simple Process - Full Screen Integration */}
+      <section className="relative">
+        {/* Section Header - Overlaid at top */}
+        <div className="absolute top-0 left-0 right-0 z-30 pt-16 pb-8">
+          <div className="container mx-auto max-w-6xl px-4">
+            <div className="text-center">
+              <div className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-pulse-500/20 text-pulse-600 px-4 py-2 rounded-full text-sm font-medium mb-6 shadow-lg">
+                <div className="w-2 h-2 bg-pulse-500 rounded-full animate-pulse"></div>
+                How It Works
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-bold text-foreground bg-white/90 backdrop-blur-sm rounded-xl px-6 py-4 shadow-lg">
+                Simple <span className="text-pulse-600">Process</span>
+              </h2>
             </div>
-            <h2 className="text-3xl sm:text-5xl font-bold text-foreground">
-              Simple <span className="text-pulse-600">Process</span>
-            </h2>
           </div>
-          <StickyScrollRevealDemo />
         </div>
+        
+        {/* Full-screen Sticky Scroll */}
+        <StickyScrollRevealDemo />
       </section>
 
       {/* About Aditya - Enhanced */}

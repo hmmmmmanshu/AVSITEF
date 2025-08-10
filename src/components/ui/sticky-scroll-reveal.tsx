@@ -19,8 +19,8 @@ export const StickyScroll = ({
   const ref = useRef<any>(null);
   const { scrollYProgress } = useScroll({
     // uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
-    // target: ref
-    container: ref,
+    target: ref,
+    // container: ref,
     offset: ["start start", "end start"],
   });
   const cardLength = content.length;
@@ -64,13 +64,13 @@ export const StickyScroll = ({
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className="relative flex h-[30rem] justify-center space-x-10 overflow-y-auto rounded-md p-10"
+      className="relative flex min-h-[400vh] justify-center space-x-10 overflow-hidden p-0"
       ref={ref}
     >
-      <div className="div relative flex items-start px-4">
+      <div className="div relative flex items-start px-4 w-full max-w-7xl">
         <div className="max-w-2xl">
           {content.map((item, index) => (
-            <div key={item.title + index} className="my-20">
+            <div key={item.title + index} className="min-h-screen flex flex-col justify-center py-20">
               <motion.h2
                 initial={{
                   opacity: 0,
@@ -78,7 +78,7 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className="text-2xl font-bold text-slate-100"
+                className="text-3xl sm:text-4xl font-bold text-slate-100 mb-6"
               >
                 {item.title}
               </motion.h2>
@@ -89,19 +89,19 @@ export const StickyScroll = ({
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
                 }}
-                className="text-kg mt-10 max-w-sm text-slate-300"
+                className="text-lg sm:text-xl max-w-lg text-slate-300 leading-relaxed"
               >
                 {item.description}
               </motion.p>
             </div>
           ))}
-          <div className="h-40" />
+          <div className="h-screen" />
         </div>
       </div>
       <div
         style={{ background: backgroundGradient }}
         className={cn(
-          "sticky top-10 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block",
+          "sticky top-20 hidden h-80 w-96 overflow-hidden rounded-xl bg-white/5 ring-1 ring-white/10 backdrop-blur lg:block",
           contentClassName,
         )}
       >
