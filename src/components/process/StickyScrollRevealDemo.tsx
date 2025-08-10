@@ -47,7 +47,7 @@ const content = [
 export const StickyScrollRevealDemo: React.FC = () => {
   return (
     <div className="w-full">
-      <StickyScroll content={content} fullPage heightClass="h-[80vh] sm:h-screen" />
+      <StickyScroll content={content} fullPage heightClass="h-screen" />
     </div>
   );
 };

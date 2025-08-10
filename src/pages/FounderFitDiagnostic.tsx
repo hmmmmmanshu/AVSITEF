@@ -200,7 +200,105 @@ const FounderFitDiagnostic: React.FC = () => {
         </div>
       </section>
 
-      {/* Remaining sections (About, Snapshots, FAQ, Guarantee, Final CTA) unchanged */}
+      {/* About Aditya */}
+      <section className="py-12 sm:py-16 px-4 bg-muted/40">
+        <div className="container mx-auto max-w-5xl">
+          <div className="grid grid-cols-1 md:grid-cols-[120px,1fr] gap-6 items-start">
+            <div className="flex justify-center md:justify-start">
+              <img src="/aditya-bajaj.jpg" alt="Aditya Bajaj" className="h-24 w-24 rounded-full object-cover border border-border shadow-sm" />
+            </div>
+            <div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground">About Aditya Bajaj</h2>
+              <div className="flex flex-wrap gap-3 text-muted-foreground mt-3">
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm"><Clock className="w-4 h-4" /> 15 years</span>
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm"><TrendingUp className="w-4 h-4" /> 3 exits</span>
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm"><Users className="w-4 h-4" /> 547 founders mentored</span>
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm"><Star className="w-4 h-4" /> ₹200 Cr raised</span>
+              </div>
+              <div className="bg-card p-4 sm:p-6 rounded-xl border border-border shadow-sm mt-4">
+                <blockquote className="text-sm sm:text-base text-foreground/80 leading-relaxed">
+                  I have been where you are multiple times. Some success and many failures later, I realized why 90% of the startups end up failing despite raising external capital. I am on a mission to change that stat and enable more founders to build, scale, and thrive with clarity and confidence.
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Success Snapshots */}
+      <section className="py-12 sm:py-16 px-4 bg-background">
+        <div className="container mx-auto max-w-4xl">
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground text-center mb-8 sm:mb-12">Success Snapshots</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            {[
+              { quote: "Aditya spotted in 20 minutes what we missed for six months — pivoted, hit ₹1L MRR.", initials: "RP", name: "Rahul P." },
+              { quote: "Call saved us ₹5L in dev costs and mapped our GTM in one week.", initials: "PS", name: "Priya S." },
+            ].map((q, i) => (
+              <Card key={i} className="border border-border bg-muted/40">
+                <CardContent className="p-5">
+                  <blockquote className="text-sm sm:text-base text-foreground/80 mb-4">{q.quote}</blockquote>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-pulse-100 rounded-full flex items-center justify-center">
+                      <span className="text-pulse-600 font-semibold">{q.initials}</span>
+                    </div>
+                    <span className="font-medium text-foreground">{q.name}</span>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-12 sm:py-16 px-4 bg-background">
+        <div className="container mx-auto max-w-3xl">
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground text-center mb-8 sm:mb-12">FAQ</h2>
+          <div className="space-y-4 sm:space-y-6">
+            {[
+              { q: "Is the call really 1-on-1?", a: "Yes — direct with Aditya, no junior coach." },
+              { q: "What if I already know I need funding?", a: "We will verify if funding is the right next step or if traction is the first fix." },
+              { q: "Is there a replay?", a: "You will receive a recap of the call and a personalized plan PDF within 24 hours of the call." },
+            ].map((f, i) => (
+              <Card key={i} className="border border-border bg-card">
+                <CardHeader>
+                  <CardTitle className="text-base sm:text-lg text-foreground">{f.q}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm sm:text-base text-muted-foreground">{f.a}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Guarantee Strip */}
+      <section className="py-8 px-4 bg-green-50 border-y border-green-200">
+        <div className="container mx-auto max-w-3xl text-center">
+          <div className="flex items-center justify-center gap-3 text-green-700">
+            <Shield className="w-5 h-5 sm:w-6 sm:h-6" />
+            <span className="text-base sm:text-lg font-semibold">100% Value-Back Promise</span>
+          </div>
+          <p className="text-sm sm:text-base text-green-600 mt-2">If after the call you feel it gave you zero clarity, email us within 24 hours for a full refund.</p>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-16 sm:py-20 px-4 bg-dark-900 text-white text-center">
+        <div className="container mx-auto max-w-3xl">
+          <h2 className="text-2xl sm:text-4xl font-bold mb-4 sm:mb-6">Ready to remove guesswork and unlock your next milestone?</h2>
+          <Button
+            onClick={handleCTAClick}
+            size="lg"
+            className="bg-primary hover:bg-pulse-600 text-primary-foreground text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 mb-3"
+          >
+            Book My Diagnostic Call – ₹499
+            <ArrowRight className="ml-2 w-5 h-5 sm:w-6 sm:h-6" />
+          </Button>
+          <p className="text-white/70 text-xs sm:text-sm">Limited to 8 calls per week to ensure depth.</p>
+        </div>
+      </section>
     </div>
   );
 };
